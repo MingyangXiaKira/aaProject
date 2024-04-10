@@ -1,7 +1,13 @@
 import React from "react";
+import LoginCard from "../components/LoginCard.tsx";
 
 const Login = () => {
-  return <div>Login</div>;
+
+
+  return <>
+    <LoginCard/>
+
+  </>
 };
 
 export default Login;
