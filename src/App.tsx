@@ -6,16 +6,11 @@ import "./App.css";
 import LoginPage from "./pages/LoginPage";
 import SettingPage from "./pages/SettingPage";
 import MainPage from "./pages/MainPage";
-import Header from "@/components/Header.tsx";
 
 function App() {
-
   return (
     <>
       <Router>
-
-        <Header />
-
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/main" element={<MainPage />} />

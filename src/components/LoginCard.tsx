@@ -1,52 +1,89 @@
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
-import styles from "./LoginCard.module.css";
-import {Button} from "../../@/components/ui/button.tsx";
-import Header from "@/components/Header.tsx";
+import React, { useState } from "react";
+import { Button } from "./ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 const LoginCard = () => {
-    const [email, setEmail] = useState("qwerty@tcd.ie");
-    const [password, setPassword] = useState("qwerty");
-    const navigate = useNavigate()
-    function handleSubmit(e) {
-        e.preventDefault();
+  let formSchema = z.object({
+    username: z.string(),
+    password: z.string(),
+  });
+  const form = useForm<z.infer<typeof formSchema>>({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+    resolver: zodResolver(formSchema),
+  });
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
+  }
+  return (
+    <div className="flex justify-center	items-center h-4/5">
+      <Card className=" border-none shadow-none	 p-5">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8 flex flex-col items-center pb-40"
+          >
+            <div className="formWrapper h-2/3 flex flex-col items-center ">
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>username</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>password</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
 
-        if (email && password) navigate("/main");
-    }
-
-    return (
-        <main className={styles.login}>
-            <Header></Header>
-
-            <form className={styles.form} onSubmit={handleSubmit}>
-                <div className={styles.row}>
-                    <label htmlFor="email" style={{color: "white", fontSize: "20px"}}>Email Address</label>
-                    <input
-                        type="email"
-                        id="email"
-                        onChange={(e) =>setEmail(e.target.value)}
-                        value={email}
-                        style={{backgroundColor: "darkgrey"}}
-                    />
-                </div>
-
-                <div className={styles.row}>
-                    <label htmlFor="password" style={{color: "white", fontSize: "20px"}}>Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={password}
-                        style={{backgroundColor: "darkgrey"}}
-                    />
-                </div>
-
-                <div>
-                    <Button >LOG IN</Button>
-                </div>
-            </form>
-        </main>
-    );
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="buttonWrapper flex justify-between h-1/3 flex items-center w-48">
+              <Button type="submit">Login</Button>
+              <Button type="submit">Register</Button>
+            </div>
+          </form>
+        </Form>
+      </Card>
+    </div>
+  );
 };
 
 export default LoginCard;
