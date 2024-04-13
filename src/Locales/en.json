@@ -1,0 +1,25 @@
+{
+  "header": {
+    "SchoolRecommodationApp": "School Recommendation App"
+  },
+  "login": {
+    "username": "username",
+    "password": "password",
+    "Login": "Login",
+    "Register": "Register"
+  },
+  "main": {
+    "Fullname": "Fullname",
+    "age": "age",
+    "residence": "residence",
+    "native_language": "native_language",
+    "gre_verbal": "gre_verbal",
+    "gre_quant": "gre_quant",
+    "cgpa": "cgpa",
+    "Submit": "Submit"
+  },
+  "school": {
+    "AcceptanceRate": "Acceptance Rate",
+    "name": "School Name"
+  }
+}

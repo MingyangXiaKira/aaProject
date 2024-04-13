@@ -6,8 +6,10 @@ import "./App.css";
 import LoginPage from "./pages/LoginPage";
 import SettingPage from "./pages/SettingPage";
 import MainPage from "./pages/MainPage";
+import './i18n.js';
 
 function App() {
+  console.log(navigator.language)
   return (
     <>
       <Router>

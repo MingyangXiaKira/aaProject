@@ -1,0 +1,25 @@
+{
+  "header": {
+    "SchoolRecommodationApp": "学校推荐应用"
+  },
+  "login": {
+    "username": "用户名",
+    "password": "密码",
+    "Login": "登录",
+    "Register": "注册"
+  },
+  "main": {
+    "Fullname": "全名",
+    "age": "年龄",
+    "residence": "居住地",
+    "native_language": "母语",
+    "gre_verbal": "GRE 语文",
+    "gre_quant": "GRE 数学",
+    "cgpa": "GPA",
+    "Submit": "提交"
+  },
+  "school": {
+    "AcceptanceRate": "录取率",
+    "name": "学校名称"
+  }
+}

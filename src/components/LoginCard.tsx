@@ -14,7 +14,8 @@ import {
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import '../i18n.js';
+import { useTranslation } from 'react-i18next';
 import {
   Form,
   FormControl,
@@ -27,6 +28,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 const LoginCard = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   let formSchema = z.object({
     username: z.string(),
@@ -78,7 +80,7 @@ const LoginCard = () => {
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>username</FormLabel>
+                      <FormLabel>{t('login.username')}</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -91,7 +93,7 @@ const LoginCard = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>password</FormLabel>
+                      <FormLabel>{t('login.password')}</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -103,10 +105,10 @@ const LoginCard = () => {
               </div>
               <div className="buttonWrapper flex justify-between h-1/4 flex items-center w-48">
                 <Button type="button" onClick={handleLogin}>
-                  Login
+                  {t('login.Login')}
                 </Button>
                 <Button type="button" onClick={handleRegister}>
-                  Register
+                  {t('login.Register')}
                 </Button>
                 <ToastContainer />
               </div>
