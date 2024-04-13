@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import {
   Card,
   CardContent,
@@ -24,10 +27,12 @@ import {
 import { Input } from "@/components/ui/input";
 
 const LoginCard = () => {
+  const navigate = useNavigate();
   let formSchema = z.object({
     username: z.string(),
     password: z.string(),
   });
+
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       username: "",
@@ -35,53 +40,80 @@ const LoginCard = () => {
     },
     resolver: zodResolver(formSchema),
   });
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  function handleLogin(event) {
+    event.preventDefault();
+    const values = form.getValues();
+    axios
+      .post("http://localhost:3000/login", values)
+      .then((response) => {
+        console.log("Login successful:", response.data);
+        navigate("/main");
+      })
+      .catch((error) => {
+        console.error("Login failed:", error.response?.data || "Unknown error");
+      });
+  }
+  function handleRegister(event) {
+    event.preventDefault();
+    const values = form.getValues();
+    axios
+      .post("http://localhost:3000/register", values)
+      .then((response) => {
+        console.log("Registration successful:", response.data);
+        toast.success("");
+      })
+      .catch((error) => {
+        console.error("Registration failed:", toast.error(""));
+      });
   }
   return (
-    <div className="flex justify-center	items-center h-4/5">
-      <Card className=" border-none shadow-none	 p-5">
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 flex flex-col items-center pb-40"
-          >
-            <div className="formWrapper h-2/3 flex flex-col items-center ">
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>username</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>password</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
+    <div>
+      <div className="flex justify-center	items-center h-3/5 ">
+        <Card className=" border-none shadow-none bg-transparent	 p-5">
+          <Form {...form}>
+            <form className="space-y-8 flex flex-col items-center ">
+              <div className="formWrapper h-2/4 flex flex-col items-center ">
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>username</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>password</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
 
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="buttonWrapper flex justify-between h-1/3 flex items-center w-48">
-              <Button type="submit">Login</Button>
-              <Button type="submit">Register</Button>
-            </div>
-          </form>
-        </Form>
-      </Card>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="buttonWrapper flex justify-between h-1/4 flex items-center w-48">
+                <Button type="button" onClick={handleLogin}>
+                  Login
+                </Button>
+                <Button type="button" onClick={handleRegister}>
+                  Register
+                </Button>
+                <ToastContainer />
+              </div>
+            </form>
+          </Form>
+        </Card>
+      </div>
     </div>
   );
 };

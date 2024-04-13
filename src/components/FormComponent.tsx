@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   Form,
   FormControl,
@@ -16,9 +18,12 @@ import {
 import { Input } from "@/components/ui/input";
 let formSchema = z.object({
   fullname: z.string().min(2).max(100),
-  email: z.string().email(),
-  satMath: z.string(),
-  satReadingWriting: z.string(),
+  age: z.string(),
+  residence: z.string(),
+  native_language: z.string(),
+  gre_verbal: z.string(),
+  gre_quant: z.string(),
+  cgpa: z.string(),
   ielts: z.string(),
 });
 formSchema = formSchema.extend({
@@ -28,23 +33,41 @@ interface FormComponentProps {
   nonEnglish?: boolean;
 }
 const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       fullname: "",
-      email: "",
-      satMath: "",
-      satReadingWriting: "",
+      age: "",
+      residence: "",
+      native_language: "",
+      gre_verbal: "",
+      gre_quant: "",
+      cgpa: "",
       ielts: "",
     },
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const modifiedValues = {
+      ...values,
+      age: parseInt(values.age, 10),
+      gre_verbal: parseInt(values.gre_verbal, 10),
+      gre_quant: parseInt(values.gre_quant, 10),
+      cgpa: parseFloat(values.cgpa),
+    };
+    console.log(modifiedValues);
+    try {
+      const response = await axios.post("", values);
+      console.log("Submission successful:", response.data);
+      navigate("/schools", { state: { data: response.data } });
+    } catch (error) {
+      console.error("Submission failed:", error);
+    }
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-1">
         <FormField
           control={form.control}
           name="fullname"
@@ -60,24 +83,10 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
         />
         <FormField
           control={form.control}
-          name="email"
+          name="age"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="satMath"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>satMath</FormLabel>
+              <FormLabel>age</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -87,10 +96,62 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
         />
         <FormField
           control={form.control}
-          name="satReadingWriting"
+          name="residence"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>satReadingWriting</FormLabel>
+              <FormLabel>residence</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="native_language"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>native_language</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="gre_verbal"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>gre_verbal</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="gre_quant"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>gre_quant</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="cgpa"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>cgpa</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
