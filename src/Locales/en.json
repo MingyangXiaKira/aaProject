@@ -15,11 +15,13 @@
     "native_language": "native_language",
     "gre_verbal": "gre_verbal",
     "gre_quant": "gre_quant",
+    "gre_analytical": "gre_analytical",
     "cgpa": "cgpa",
     "Submit": "Submit"
   },
   "school": {
     "AcceptanceRate": "Acceptance Rate",
-    "name": "School Name"
+    "name": "School Name",
+    "level": "level"
   }
 }

@@ -15,11 +15,13 @@
     "native_language": "मातृभाषा",
     "gre_verbal": "जीआरई शब्दात्मक",
     "gre_quant": "जीआरई सांख्यिकी",
+    "gre_analytical": "जीआरई विश्लेषणात्मक",
     "cgpa": "सीजीपीए",
     "Submit": "प्रस्तुत"
   },
   "school": {
     "AcceptanceRate": "स्वीकृति दर",
-    "name": "विद्यालय का नाम"
+    "name": "विद्यालय का नाम",
+    "level": "स्तर"
   }
 }

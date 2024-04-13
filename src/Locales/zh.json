@@ -15,11 +15,13 @@
     "native_language": "母语",
     "gre_verbal": "GRE 语文",
     "gre_quant": "GRE 数学",
+    "gre_analytical": "GRE 分析",
     "cgpa": "GPA",
     "Submit": "提交"
   },
   "school": {
     "AcceptanceRate": "录取率",
-    "name": "学校名称"
+    "name": "学校名称",
+    "level": "水平程度"
   }
 }

@@ -7,17 +7,19 @@ const SchoolList = () => {
   const data = location.state?.data;
   console.log("Received data:", data);
 
-  const fakeData = {
-    schools: [
-      { name: "School A", acceptanceRate: 80 },
-      { name: "School B", acceptanceRate: 65 },
-      { name: "School C", acceptanceRate: 90 },
-      { name: "School D", acceptanceRate: 75 },
-    ],
-  };
+  const schools = data
+      ? data.prediction
+          .map(([name, acceptanceRate, level]) => ({
+            name: name,
+            acceptanceRate: parseFloat(acceptanceRate.replace("%", "")),
+            level: level,
+          }))
+          .sort((a, b) => b.acceptanceRate - a.acceptanceRate)
+      : [];
+
   return (
     <div>
-      {fakeData && fakeData.schools.map((school,index)=>(
+      {schools.map((school,index)=>(
           <SchoolItem key={index} school={school}/>
       ))}
 

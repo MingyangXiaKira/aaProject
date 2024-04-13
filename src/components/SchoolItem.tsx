@@ -10,7 +10,7 @@ import {
 import '../i18n.js';
 import { useTranslation } from 'react-i18next';
 const SchoolItem = ({ school }) => {
-  const { name, acceptanceRate } = school;
+  const { name, acceptanceRate, level } = school;
   const { t,i18n } = useTranslation();
 
 
@@ -22,6 +22,7 @@ const SchoolItem = ({ school }) => {
           </CardHeader>
           <CardContent>
             <p>{t('school.AcceptanceRate')}: {acceptanceRate}%</p>
+            <p>{t('school.level')}: {level}</p>
           </CardContent>
         </Card>
       </div>

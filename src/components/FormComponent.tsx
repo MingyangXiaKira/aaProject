@@ -25,6 +25,7 @@ let formSchema = z.object({
   native_language: z.string(),
   gre_verbal: z.string(),
   gre_quant: z.string(),
+  gre_analytical:z.string(),
   cgpa: z.string(),
   ielts: z.string(),
 });
@@ -45,6 +46,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
       native_language: "",
       gre_verbal: "",
       gre_quant: "",
+      gre_analytical:"",
       cgpa: "",
       ielts: "",
     },
@@ -57,11 +59,12 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
       age: parseInt(values.age, 10),
       gre_verbal: parseInt(values.gre_verbal, 10),
       gre_quant: parseInt(values.gre_quant, 10),
+      gre_analytical:parseInt(values.gre_analytical, 10),
       cgpa: parseFloat(values.cgpa),
     };
     console.log(modifiedValues);
     try {
-      const response = await axios.post("", values);
+      const response = await axios.post("http://127.0.0.1:5000/submit", values);
       console.log("Submission successful:", response.data);
       navigate("/schools", { state: { data: response.data } });
     } catch (error) {
@@ -149,6 +152,19 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
             </FormItem>
           )}
         />
+          <FormField
+              control={form.control}
+              name="gre_analytical"
+              render={({ field }) => (
+                  <FormItem>
+                      <FormLabel>{t('main.gre_analytical')}</FormLabel>
+                      <FormControl>
+                          <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                  </FormItem>
+              )}
+          />
         <FormField
           control={form.control}
           name="cgpa"
