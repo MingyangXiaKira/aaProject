@@ -1,6 +1,6 @@
 {
   "header": {
-    "SchoolRecommodationApp": "School Recommendation App"
+    "SchoolRecommodationApp": "University Recommendation App - EduGenie"
   },
   "login": {
     "username": "username",
@@ -21,7 +21,7 @@
   },
   "school": {
     "AcceptanceRate": "Acceptance Rate",
-    "name": "School Name",
+    "name": "University Name",
     "level": "level"
   }
 }

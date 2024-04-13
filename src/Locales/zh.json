@@ -1,6 +1,6 @@
 {
   "header": {
-    "SchoolRecommodationApp": "学校推荐应用"
+    "SchoolRecommodationApp": "大学推荐应用"
   },
   "login": {
     "username": "用户名",
@@ -21,7 +21,7 @@
   },
   "school": {
     "AcceptanceRate": "录取率",
-    "name": "学校名称",
+    "name": "大学名称",
     "level": "水平程度"
   }
 }
