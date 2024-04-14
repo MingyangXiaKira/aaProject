@@ -8,21 +8,20 @@ const SchoolList = () => {
   console.log("Received data:", data);
 
   const schools = data
-      ? data.prediction
-          .map(([name, acceptanceRate, level]) => ({
-            name: name,
-            acceptanceRate: parseFloat(acceptanceRate.replace("%", "")),
-            level: level,
-          }))
-          .sort((a, b) => b.acceptanceRate - a.acceptanceRate)
-      : [];
+    ? data.prediction
+        .map(([name, acceptanceRate, level]) => ({
+          name: name,
+          acceptanceRate: parseFloat(acceptanceRate.replace("%", "")),
+          level: level,
+        }))
+        .sort((a, b) => b.acceptanceRate - a.acceptanceRate)
+    : [];
 
   return (
-    <div>
-      {schools.map((school,index)=>(
-          <SchoolItem key={index} school={school}/>
+    <div className="px-10">
+      {schools.map((school, index) => (
+        <SchoolItem key={index} school={school} />
       ))}
-
     </div>
   );
 };
