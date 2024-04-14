@@ -107,9 +107,11 @@ const LoginCard = () => {
                   )}
                 />
               </div>
-              <div className="buttonWrapper flex justify-between h-1/4 flex items-center w-48">
-                <Button type="button" onClick={handleLogin}>
+
+              <div className="buttonWrapper flex justify-between h-1/4 flex items-center w-48" >
+                <Button type="button" onClick={handleLogin} >
                   {t("login.Login")}
+
                 </Button>
                 <Button type="button" onClick={handleRegister}>
                   {t("login.Register")}

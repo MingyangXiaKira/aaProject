@@ -3,11 +3,11 @@ import React from "react";
 import Header from "@/components/Header.tsx";
 
 const SchoolsPage = () => {
-  return (
-      <div
-          className="h-full"
-          style={{
-              backgroundImage: `linear-gradient(
+    return (
+        <div
+            className="h-full"
+            style={{
+                backgroundImage: `linear-gradient(
           310deg,
           hsl(244deg 100% 94%) 0%,
           hsl(276deg 82% 93%) 14%,
@@ -20,12 +20,12 @@ const SchoolsPage = () => {
           hsl(45deg 100% 93%) 97%,
           hsl(54deg 100% 94%) 100%
         )`,
-          }}
-      >
-       <Header></Header>
-      <SchoolList />
-    </div>
-  );
+            }}
+        >
+            <Header></Header>
+            <SchoolList />
+        </div>
+    );
 };
 
 export default SchoolsPage;
