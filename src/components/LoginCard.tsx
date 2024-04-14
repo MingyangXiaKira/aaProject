@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "./ui/button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   Card,
   CardContent,
@@ -14,8 +14,8 @@ import {
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import '../i18n.js';
-import { useTranslation } from 'react-i18next';
+import "../i18n.js";
+import { useTranslation } from "react-i18next";
 import {
   Form,
   FormControl,
@@ -26,10 +26,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { AlertDestructive } from "./Alert";
 
 const LoginCard = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [alert, setAlert] = useState(false);
   let formSchema = z.object({
     username: z.string(),
     password: z.string(),
@@ -44,7 +46,7 @@ const LoginCard = () => {
   });
   function handleLogin(event) {
     event.preventDefault();
-    // const values = form.getValues();
+    const values = form.getValues();
     // axios
     //   .post("http://localhost:3000/login", values)
     //   .then((response) => {
@@ -63,10 +65,11 @@ const LoginCard = () => {
       .post("http://localhost:3000/register", values)
       .then((response) => {
         console.log("Registration successful:", response.data);
-        toast.success("");
+        setAlert(false);
       })
       .catch((error) => {
-        console.error("Registration failed:", toast.error(""));
+        console.error("Registration failed:");
+        setAlert(true);
       });
   }
   return (
@@ -81,7 +84,7 @@ const LoginCard = () => {
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('login.username')}</FormLabel>
+                      <FormLabel>{t("login.username")}</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -94,7 +97,7 @@ const LoginCard = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('login.password')}</FormLabel>
+                      <FormLabel>{t("login.password")}</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -104,17 +107,19 @@ const LoginCard = () => {
                   )}
                 />
               </div>
+
               <div className="buttonWrapper flex justify-between h-1/4 flex items-center w-48" >
                 <Button type="button" onClick={handleLogin} >
-                  {t('login.Login')}
+                  {t("login.Login")}
+
                 </Button>
                 <Button type="button" onClick={handleRegister}>
-                  {t('login.Register')}
+                  {t("login.Register")}
                 </Button>
-                <ToastContainer />
               </div>
             </form>
           </Form>
+          {alert && <AlertDestructive />}
         </Card>
       </div>
     </div>

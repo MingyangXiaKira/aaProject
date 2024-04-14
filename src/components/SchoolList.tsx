@@ -10,6 +10,7 @@ const SchoolList = () => {
     const data = location.state?.data;
     console.log("Received data:", data);
 
+
     const schools = data
         ? data.prediction
             .map(([name, acceptanceRate, level]) => ({
@@ -86,6 +87,9 @@ const SchoolList = () => {
             </div>
         </div>
     );
+
+
+
 };
 
 export default SchoolList;

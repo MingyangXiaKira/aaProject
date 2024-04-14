@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -7,14 +7,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import '../i18n.js';
-import { useTranslation } from 'react-i18next';
+import "../i18n.js";
+import { useTranslation } from "react-i18next";
 const SchoolItem = ({ school }) => {
   const { name, acceptanceRate, level } = school;
-  const { t,i18n } = useTranslation();
-
+  const { t, i18n } = useTranslation();
 
   return (
+
       <div className="w-1/2 p-4 ">
         <Card style={{
           backgroundImage: `linear-gradient(
@@ -40,8 +40,10 @@ const SchoolItem = ({ school }) => {
           </CardContent>
         </Card>
       </div>
+
+
+
   );
 };
 
 export default SchoolItem;
-
