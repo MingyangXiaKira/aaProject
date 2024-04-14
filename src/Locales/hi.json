@@ -1,0 +1,27 @@
+{
+  "header": {
+    "SchoolRecommodationApp": "विश्वविद्यालय की सिफारिश ऐप"
+  },
+  "login": {
+    "username": "उपयोगकर्ता नाम",
+    "password": "पासवर्ड",
+    "Login": "लॉग इन करें",
+    "Register": "रजिस्टर करें"
+  },
+  "main": {
+    "Fullname": "पूरा नाम",
+    "age": "आयु",
+    "residence": "निवास",
+    "native_language": "मातृभाषा",
+    "gre_verbal": "जीआरई वर्बल",
+    "gre_quant": "जीआरई क्वांट",
+    "gre_analytical": "जीआरई विश्लेषिकीय",
+    "cgpa": "सीजीपीए",
+    "Submit": "प्रस्तुत करें"
+  },
+  "school": {
+    "AcceptanceRate": "स्वीकृति दर",
+    "name": "विश्वविद्यालय का नाम",
+    "level": "स्तर"
+  }
+}

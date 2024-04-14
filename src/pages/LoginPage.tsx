@@ -1,8 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
 import LoginCard from "../components/LoginCard.tsx";
 import Header from "../components/Header.tsx";
+import {useTranslation} from "react-i18next";
 
 const Login = () => {
+    const { i18n } = useTranslation();
+    // detect user browser language
+    useEffect(() => {
+        const browserLanguage = navigator.language;
+        const userLanguage = browserLanguage.split('-')[0];
+
+        if (['en', 'hi', 'zh'].includes(userLanguage)) {
+            i18n.changeLanguage(userLanguage);
+            console.log(i18n.language)
+        } else {
+            i18n.changeLanguage('en');
+            console.log(i18n.language)
+        }
+    }, [i18n]);
+
   return (
     <div
       className="h-full"

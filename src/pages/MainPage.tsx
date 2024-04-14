@@ -24,7 +24,7 @@ const MainPage = () => {
       }}
     >
       <Header />
-      <FormComponent />
+      <FormComponent nonEnglish={false}/>
     </div>
   );
 };

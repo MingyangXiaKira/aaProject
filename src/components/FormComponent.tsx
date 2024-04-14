@@ -1,4 +1,6 @@
 import React from "react";
+import '../i18n.js';
+import { useTranslation } from 'react-i18next';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -23,6 +25,7 @@ let formSchema = z.object({
   native_language: z.string(),
   gre_verbal: z.string(),
   gre_quant: z.string(),
+  gre_analytical:z.string(),
   cgpa: z.string(),
   ielts: z.string(),
 });
@@ -33,6 +36,7 @@ interface FormComponentProps {
   nonEnglish?: boolean;
 }
 const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
+    const { t } = useTranslation();
   const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
@@ -42,6 +46,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
       native_language: "",
       gre_verbal: "",
       gre_quant: "",
+      gre_analytical:"",
       cgpa: "",
       ielts: "",
     },
@@ -54,11 +59,12 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
       age: parseInt(values.age, 10),
       gre_verbal: parseInt(values.gre_verbal, 10),
       gre_quant: parseInt(values.gre_quant, 10),
+      gre_analytical:parseInt(values.gre_analytical, 10),
       cgpa: parseFloat(values.cgpa),
     };
     console.log(modifiedValues);
     try {
-      const response = await axios.post("", values);
+      const response = await axios.post("http://127.0.0.1:5000/submit", values);
       console.log("Submission successful:", response.data);
       navigate("/schools", { state: { data: response.data } });
     } catch (error) {
@@ -73,7 +79,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
           name="fullname"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Fullname</FormLabel>
+              <FormLabel> {t('main.Fullname')}</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -86,7 +92,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
           name="age"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>age</FormLabel>
+              <FormLabel>{t('main.age')}</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -99,7 +105,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
           name="residence"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>residence</FormLabel>
+              <FormLabel>{t('main.residence')}</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -112,7 +118,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
           name="native_language"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>native_language</FormLabel>
+              <FormLabel>{t('main.native_language')}</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -125,7 +131,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
           name="gre_verbal"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>gre_verbal</FormLabel>
+              <FormLabel>{t('main.gre_verbal')}</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -138,7 +144,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
           name="gre_quant"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>gre_quant</FormLabel>
+              <FormLabel>{t('main.gre_quant')}</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -146,12 +152,25 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
             </FormItem>
           )}
         />
+          <FormField
+              control={form.control}
+              name="gre_analytical"
+              render={({ field }) => (
+                  <FormItem>
+                      <FormLabel>{t('main.gre_analytical')}</FormLabel>
+                      <FormControl>
+                          <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                  </FormItem>
+              )}
+          />
         <FormField
           control={form.control}
           name="cgpa"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>cgpa</FormLabel>
+              <FormLabel>{t('main.cgpa')}</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -175,7 +194,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ nonEnglish }) => {
             )}
           />
         )}
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{t('main.Submit')}</Button>
       </form>
     </Form>
   );

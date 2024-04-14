@@ -14,7 +14,8 @@ import {
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import "../i18n.js";
+import { useTranslation } from "react-i18next";
 import {
   Form,
   FormControl,
@@ -28,6 +29,7 @@ import { Input } from "@/components/ui/input";
 import { AlertDestructive } from "./Alert";
 
 const LoginCard = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [alert, setAlert] = useState(false);
   let formSchema = z.object({
@@ -44,15 +46,17 @@ const LoginCard = () => {
   });
   function handleLogin(event) {
     event.preventDefault();
-    const values = form.getValues();
-    axios
-      .post("http://localhost:3000/login", values)
-      .then((response) => {
-        navigate("/main");
-      })
-      .catch((error) => {
-        setAlert(true);
-      });
+    // const values = form.getValues();
+    // axios
+    //   .post("http://localhost:3000/login", values)
+    //   .then((response) => {
+    //     console.log("Login successful:", response.data);
+    //     navigate("/main");
+    //   })
+    //   .catch((error) => {
+    //     console.error("Login failed:", error.response?.data || "Unknown error");
+    //   });
+    navigate("/main");
   }
   function handleRegister(event) {
     event.preventDefault();
@@ -80,7 +84,7 @@ const LoginCard = () => {
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>username</FormLabel>
+                      <FormLabel>{t("login.username")}</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -93,7 +97,7 @@ const LoginCard = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>password</FormLabel>
+                      <FormLabel>{t("login.password")}</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -105,10 +109,10 @@ const LoginCard = () => {
               </div>
               <div className="buttonWrapper flex justify-between h-1/4 flex items-center w-48">
                 <Button type="button" onClick={handleLogin}>
-                  Login
+                  {t("login.Login")}
                 </Button>
                 <Button type="button" onClick={handleRegister}>
-                  Register
+                  {t("login.Register")}
                 </Button>
               </div>
             </form>
