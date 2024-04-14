@@ -22,6 +22,7 @@
   "school": {
     "AcceptanceRate": "स्वीकृति दर",
     "name": "विश्वविद्यालय का नाम",
-    "level": "स्तर"
+    "level": "स्तर",
+    "RecommendedResults": "सिफारिशित परिणाम"
   }
 }
