@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "./ui/button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   Card,
   CardContent,
@@ -25,9 +25,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { AlertDestructive } from "./Alert";
 
 const LoginCard = () => {
   const navigate = useNavigate();
+  const [alert, setAlert] = useState(false);
   let formSchema = z.object({
     username: z.string(),
     password: z.string(),
@@ -46,11 +48,10 @@ const LoginCard = () => {
     axios
       .post("http://localhost:3000/login", values)
       .then((response) => {
-        console.log("Login successful:", response.data);
         navigate("/main");
       })
       .catch((error) => {
-        console.error("Login failed:", error.response?.data || "Unknown error");
+        setAlert(true);
       });
   }
   function handleRegister(event) {
@@ -60,10 +61,11 @@ const LoginCard = () => {
       .post("http://localhost:3000/register", values)
       .then((response) => {
         console.log("Registration successful:", response.data);
-        toast.success("");
+        setAlert(false);
       })
       .catch((error) => {
-        console.error("Registration failed:", toast.error(""));
+        console.error("Registration failed:");
+        setAlert(true);
       });
   }
   return (
@@ -108,10 +110,10 @@ const LoginCard = () => {
                 <Button type="button" onClick={handleRegister}>
                   Register
                 </Button>
-                <ToastContainer />
               </div>
             </form>
           </Form>
+          {alert && <AlertDestructive />}
         </Card>
       </div>
     </div>
