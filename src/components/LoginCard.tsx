@@ -46,16 +46,16 @@ const LoginCard = () => {
   });
   function handleLogin(event) {
     event.preventDefault();
-    // const values = form.getValues();
-    // axios
-    //   .post("http://localhost:3000/login", values)
-    //   .then((response) => {
-    //     console.log("Login successful:", response.data);
-    //     navigate("/main");
-    //   })
-    //   .catch((error) => {
-    //     console.error("Login failed:", error.response?.data || "Unknown error");
-    //   });
+    const values = form.getValues();
+    axios
+      .post("http://localhost:3000/login", values)
+      .then((response) => {
+        console.log("Login successful:", response.data);
+        navigate("/main");
+      })
+      .catch((error) => {
+        console.error("Login failed:", error.response?.data || "Unknown error");
+      });
     navigate("/main");
   }
   function handleRegister(event) {
