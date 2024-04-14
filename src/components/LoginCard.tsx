@@ -56,7 +56,7 @@ const LoginCard = () => {
       .catch((error) => {
         console.error("Login failed:", error.response?.data || "Unknown error");
       });
-    navigate("/main");
+    // navigate("/main");
   }
   function handleRegister(event) {
     event.preventDefault();
